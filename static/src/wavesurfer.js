@@ -165,7 +165,7 @@ var WaveSurfer = {
             {
                 var intervelflag = 0;
                 setInterval(function(){
-                    console.log("wavesurfer.getCurrentTime(): ", wavesurfer.getCurrentTime());
+                    // console.log("wavesurfer.getCurrentTime(): ", wavesurfer.getCurrentTime());
 
                     if(karaokeaudio.currentTime>=end)
                     {
