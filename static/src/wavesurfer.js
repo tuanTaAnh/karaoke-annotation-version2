@@ -148,6 +148,10 @@ var WaveSurfer = {
     },
 
     play: function (start, end) {
+        console.log("PLAY PLAY PLAY: ", start, " ", end, " ", playfalg);
+
+        var loopcheckbox = document.getElementById("loop-checkbox");
+
 
         if(start != undefined)
         {
@@ -157,38 +161,78 @@ var WaveSurfer = {
             var karaokeaudio = document.getElementById("audio-karaoke");
             karaokeaudio.currentTime = start;
 
-            // setInterval(function(){
-            //
-            //     if(karaokeaudio.currentTime>=end)
-            //     {
-            //         karaokeaudio.pause();
-            //     }
-            //   },100);
+            if(playfalg == 2)
+            {
+                var intervelflag = 0;
+                setInterval(function(){
+                    console.log("wavesurfer.getCurrentTime(): ", wavesurfer.getCurrentTime());
+
+                    if(karaokeaudio.currentTime>=end)
+                    {
+                        if(playfalg == 2 && loopcheckbox.checked)
+                        {
+                            intervelflag = 0;
+                            console.log("1");
+                            var currenttime = wavesurfer.getCurrentTime();
+                            console.log("currenttime PLAY: ", currenttime);
+                            // karaokeaudio.currentTime = start;
+                            wavesurfer.play(start, end);
+                        }
+                        else if(playfalg == 2 && intervelflag != 1)
+                        {
+                            intervelflag = 1;
+                            console.log("2");
+                            var currenttime = wavesurfer.getCurrentTime();
+                            console.log("currenttime PLAY: ", currenttime);
+                            karaokeaudio.pause();
+                            wavesurfer.backend.setTime(karaokeaudio.currentTime);
+                        }
+                    }
+                },100);
+            }
 
             if(karaokeaudio.paused)
             {
                 karaokeaudio.play();
             }
+
         }
 
 
-        // this.backend.play(start, end);
+        this.backend.play(start, end);
         console.log("PLAY", start);
-        this.backend.play(start);
+        console.log("loopcheckbox", loopcheckbox.checked);
+        if(start != undefined && playfalg == 2)
+        {
+            console.log("playfalg");
+            this.backend.play(start, end);
+        }
+        else
+        {
+            this.backend.play(start);
+        }
         this.restartAnimationLoop();
         this.fireEvent('play');
     },
 
     pause: function () {
+        console.log("wavesurfer.getCurrentTime()1: ", wavesurfer.getCurrentTime());
         this.backend.pause();
+        console.log("wavesurfer.getCurrentTime()2: ", wavesurfer.getCurrentTime());
         this.fireEvent('pause');
+        console.log("wavesurfer.getCurrentTime()3: ", wavesurfer.getCurrentTime());
     },
 
     playPause: function () {
-        // console.log("this: ", this)
-        // console.log("this.backend: ", this.backend)
+        console.log("this.backend.isPaused(): ", this.backend.isPaused());
         this.backend.isPaused() ? this.play() : this.pause();
     },
+
+    isPaused: function ()
+    {
+        return this.backend.isPaused();
+    },
+
 
     skipBackward: function (seconds) {
         console.log("this.params.skipLength: ", this.params.skipLength)

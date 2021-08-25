@@ -1,0 +1,36 @@
+#form-container {
+  overflow: hidden;
+  width: 1000px;
+}
+
+#form-inner {
+  overflow: hidden;
+  width: 2000px;
+  margin-bottom: 0px;
+}
+
+.form-child {
+  float: left;
+  width: 50px;
+  height: 15px;
+}
+
+.form-input {
+  float: left;
+  width: 100px;
+  margin-left: 20px;
+  margin-top: 5px;
+  height: 30px;
+}
+
+.form-success{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.form-delete{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}

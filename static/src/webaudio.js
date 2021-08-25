@@ -294,7 +294,9 @@ WaveSurfer.WebAudio = {
      * @param {Number} end When to stop
      * relative to the beginning of a clip.
      */
+
     play: function (start, end) {
+        console.log("BACKEND PLAY");
         // need to re-create source on each playback
         this.createSource();
 
@@ -313,13 +315,34 @@ WaveSurfer.WebAudio = {
     /**
      * Pauses the loaded audio.
      */
+    // pauseloop: function () {
+    //     console.log("wavesurfer.getCurrentTime()1aloop: ", wavesurfer.getCurrentTime());
+    //     this.scheduledPause = null;
+    //     console.log("wavesurfer.getCurrentTime()1bloop: ", wavesurfer.getCurrentTime());
+    //
+    //     // this.startPosition += this.getPlayedTime();
+    //     console.log("wavesurfer.getCurrentTime()1cloop: ", wavesurfer.getCurrentTime());
+    //     this.source && this.source.stop(0);
+    //     console.log("wavesurfer.getCurrentTime()1dloop: ", wavesurfer.getCurrentTime());
+    //
+    //     this.setState(this.PAUSED_STATE);
+    //     console.log("wavesurfer.getCurrentTime()1eloop: ", wavesurfer.getCurrentTime());
+    // },
+    setTime: function (time){
+        this.startPosition = time;
+    },
     pause: function () {
+        console.log("wavesurfer.getCurrentTime()1a: ", wavesurfer.getCurrentTime());
         this.scheduledPause = null;
+        console.log("wavesurfer.getCurrentTime()1b: ", wavesurfer.getCurrentTime());
 
         this.startPosition += this.getPlayedTime();
+        console.log("wavesurfer.getCurrentTime()1c: ", wavesurfer.getCurrentTime());
         this.source && this.source.stop(0);
+        console.log("wavesurfer.getCurrentTime()1d: ", wavesurfer.getCurrentTime());
 
         this.setState(this.PAUSED_STATE);
+        console.log("wavesurfer.getCurrentTime()1e: ", wavesurfer.getCurrentTime());
     },
 
     /**

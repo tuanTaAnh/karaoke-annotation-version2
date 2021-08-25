@@ -71,12 +71,15 @@ document.addEventListener('DOMContentLoaded', function () {
         //     });
         // }
 
-         wavesurfer.on('region-click', function (region, e) {
-            e.stopPropagation();
-            // Play on click, loop on shift click
-            // e.shiftKey ? region.playLoop() : region.play();
-        });
-        wavesurfer.on('region-click', regionClick);
+        //  wavesurfer.on('region-click', function (region, e) {
+        //      if(playfalg == 2)
+        //      {
+        //          e.stopPropagation();
+        //         // Play on click, loop on shift click
+        //         // e.shiftKey ? region.playLoop() : region.play();
+        //      }
+        // });
+        // wavesurfer.on('region-click', regionClick);
         wavesurfer.on('region-updated', saveRegions);
         wavesurfer.on('region-removed', saveRegions);
         wavesurfer.on('region-in', showNote);
@@ -126,13 +129,16 @@ function displayRegions(regions) {
  }
 
  function regionClick(regions){
-    console.log("regionClick");
-    console.log("regions: ", regions);
-    var start = parseFloat(regions.start);
-    var end = parseFloat(regions.end);
-    console.log("start: ", start);
-    console.log("end: ", end);
-    wavesurfer.play(start, end);
+    if(playfalg == 2)
+    {
+        console.log("regionClick");
+        console.log("regions: ", regions);
+        var start = parseFloat(regions.start);
+        var end = parseFloat(regions.end);
+        console.log("start: ", start);
+        console.log("end: ", end);
+        wavesurfer.play(start, end);
+    }
  }
 
  /**

@@ -5,17 +5,64 @@ var wavesurfer = window.wavesurfer; // eslint-disable-line no-var
 let GLOBAL_ACTIONS = {
     playaudio: function() {
         console.log("Play Global action!")
+        var currenttime = wavesurfer.getCurrentTime();
+        console.log("currenttime PLAY1: ", currenttime);
+        playfalg = 1;
         var karaokeaudio = document.getElementById("audio-karaoke");
-        console.log(karaokeaudio.duration);
-        console.log("karaokeaudio: ", typeof(karaokeaudio));
-        console.log("karaokeaudio: ", karaokeaudio);
+        // console.log(karaokeaudio.duration);
+        // console.log("karaokeaudio: ", typeof(karaokeaudio));
+        // console.log("karaokeaudio: ", karaokeaudio);
         if(karaokeaudio.paused) {
             karaokeaudio.play();
         } else {
             karaokeaudio.pause();
         }
         karaokeaudio.muted = true;
-        wavesurfer.playPause();
+
+        if(audioflag != 0)
+       {
+            if(wavesurfer.isPaused() == true)
+            {
+                var currenttime = wavesurfer.getCurrentTime();
+                console.log("currenttime PLAY: ", currenttime);
+                wavesurfer.play(currenttime);
+
+                document.getElementById("play-button").style.display = "none";
+                document.getElementById("pause-button").style.display = "block";
+            }
+            else
+            {
+                wavesurfer.pause();
+                document.getElementById("play-button").style.display = "block";
+                document.getElementById("pause-button").style.display = "none";
+            }
+       }
+
+
+
+    },
+
+    playsegment: function() {
+        console.log("Play Global action!")
+        var regfalg = 0;
+        if(wavesurfer.isPaused() == true)
+        {
+            playfalg = 2;
+            var currenttime = wavesurfer.getCurrentTime();
+            for(const regionID in wavesurfer.regions.list)
+            {
+                if(currenttime >= wavesurfer.regions.list[regionID].start && currenttime <= wavesurfer.regions.list[regionID].end)
+                {
+                    wavesurfer.play(wavesurfer.regions.list[regionID].start, wavesurfer.regions.list[regionID].end);
+                    regfalg = 1;
+                }
+            }
+        }
+        else
+        {
+            playfalg = 0;
+            wavesurfer.pause()
+        }
     },
 
     back: function() {
