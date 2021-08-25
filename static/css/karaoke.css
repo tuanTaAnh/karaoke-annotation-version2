@@ -1,0 +1,81 @@
+body{
+    color: #666;
+    font-family: 'PT Sans', sans-serif
+}
+
+h2{
+    text-align: center
+}
+#karaoke{
+    display: block;
+    text-align: center;
+    width: 800px;
+    height: 100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    margin: 50px auto;
+    box-shadow: inset 0 0 10px #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    color: #888
+}
+#karaoke li{
+    width: 98%;
+    min-height: 38px;
+    padding: 0px 2%;
+    list-style: none;
+    text-align: center;
+}
+#karaoke li p{
+    background: #eee;
+    color: #444
+}
+#karaoke p{
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 16px;
+}
+pre{
+    width: 500px;
+    height: 100px;
+    display: none
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  width: 100%;
+  height: auto;
+}
+
+.aud-control {
+  display: block;
+  text-align: center;
+  margin-top: 100px;
+}
+
+#karaoke .kara-text,
+#karaoke .kara-text-highlight {
+  display: inline-block;
+  font-size: 40px;
+  white-space: nowrap;
+}
+
+#karaoke .kara-text {
+  position: relative;
+}
+
+#karaoke .kara-text-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: violet;
+  text-shadow: 0px 0px 20px violet;
+  overflow: hidden;
+}
