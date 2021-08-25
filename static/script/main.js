@@ -230,6 +230,12 @@ function displayRegions(regions) {
             var tabCell = tr.insertCell(-1);
             var content = datatable[i][header_list[j]];
 
+            if(j == 0 || j == 1)
+            {
+                content = Math.round(parseFloat(content) * 100) / 100;
+                content = content.toString();
+            }
+
             if(j == 2)
             {
                 content = content.note;
@@ -265,10 +271,14 @@ function displayRegions(regions) {
                                         var getcol = event.path["2"];
                                         var start = parseFloat(getcol.childNodes[0].innerText);
                                         var end = parseFloat(getcol.childNodes[1].innerText);
+                                        console.log("start: ", start);
+                                        console.log("start: ", end);
                                         wavesurfer.play(start, end);
                                         for(const regionID in wavesurfer.regions.list)
                                         {
-                                            if(start == wavesurfer.regions.list[regionID].start && end == wavesurfer.regions.list[regionID].end)
+                                            var regstart = Math.round(parseFloat(wavesurfer.regions.list[regionID].start) * 100) / 100;
+                                            var regend = Math.round(parseFloat(wavesurfer.regions.list[regionID].end) * 100) / 100;
+                                            if(start == regstart && end == regend)
                                             {
                                                 editAnnotation(wavesurfer.regions.list[regionID]);
                                             }
@@ -421,6 +431,10 @@ function editAnnotation (region) {
         form.dataset.region = null;
     };
     form.dataset.region = region.id;
+
+    console.log("form.elements.start.value: ", form.elements.start.value);
+    console.log("form.elements.end.value: ", form.elements.end.value);
+
 }
 
 
