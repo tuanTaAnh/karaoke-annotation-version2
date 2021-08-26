@@ -45,13 +45,15 @@ let GLOBAL_ACTIONS = {
     playsegment: function() {
         console.log("Play Global action!")
         var regfalg = 0;
+        console.log("wavesurfer.isPaused(): ", wavesurfer.isPaused());
         if(wavesurfer.isPaused() == true)
         {
             playfalg = 2;
             var currenttime = wavesurfer.getCurrentTime();
             for(const regionID in wavesurfer.regions.list)
             {
-                if(currenttime >= wavesurfer.regions.list[regionID].start && currenttime <= wavesurfer.regions.list[regionID].end)
+                console.log(currenttime, " ", wavesurfer.regions.list[regionID].start, " ", wavesurfer.regions.list[regionID].end);
+                if(roundNum(currenttime) >= roundNum(wavesurfer.regions.list[regionID].start) && roundNum(currenttime) <= roundNum(wavesurfer.regions.list[regionID].end) + 0.1)
                 {
                     wavesurfer.play(wavesurfer.regions.list[regionID].start, wavesurfer.regions.list[regionID].end);
                     regfalg = 1;

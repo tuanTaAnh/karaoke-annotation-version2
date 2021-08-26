@@ -260,6 +260,7 @@ function displayRegions(regions) {
                 btn.value = lyric;
                 console.log("lyric: ", lyric);
                 console.log("btn.value: ", btn.value);
+                console.log("btn.value: ", btn.value);
                 btn.style.background = randomColor(0.1);
                 btn.style.color = "black";
                 btn.style.border = "#2e6da4";
